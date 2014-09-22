@@ -11,6 +11,7 @@ public class PowerManagement extends CordovaPlugin {
 
   private static final String ACTION_KEEP_AWAKE = "acquire";
   private static final String ACTION_ALLOW_SLEEP_AGAIN = "release";
+  private static final String ACTION_REBOOT = "reboot";
 
   @Override
   public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
@@ -35,8 +36,17 @@ public class PowerManagement extends CordovaPlugin {
             });
         return true;
 
+      } else if (ACTION_REBOOT.equals(action)) {
+        try {
+            Process proc = Runtime.getRuntime().exec(new String[] { "su", "-c", "reboot" });
+            proc.waitFor();
+        } catch (Exception ex) {
+            //Log.i(TAG, "Could not reboot", ex);
+            callbackContext.error("Could not reboot");
+        }
+        return true;
       } else {
-        callbackContext.error("insomnia." + action + " is not a supported function. Did you mean '" + ACTION_KEEP_AWAKE + "'?");
+        callbackContext.error("powerManagement." + action + " is not a supported function. Did you mean '" + ACTION_KEEP_AWAKE + "'?");
         return false;
       }
     } catch (Exception e) {

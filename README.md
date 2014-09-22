@@ -2,11 +2,7 @@ PowerManagement
 ===============
 Plugin for PhoneGap Build
 
-The original plugin was not compatible with PhoneGap Build.  We created a plugin.xml for ios.
-Android will follow shortly, but we are not deploying there right now and cannot test it.
-
-The rest of this file is edited the original readme
----------
+Based on the work of https://github.com/simplec-dev/powermanagement but with support to reboot a device. Rebooting requires root access on your device.
 
 The PowerManagement plugin offers access to the devices power-management functionality.
 It should be used for applications which keep running for a long time without any user interaction.
@@ -24,5 +20,8 @@ Using the plugin
     
 	// allow device to sleep
     window.plugins.powerManagement.release();
+
+    // reboot device (requires rooted device)
+    window.plugins.powerManagement.reboot();
     
     

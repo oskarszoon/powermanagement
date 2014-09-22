@@ -28,4 +28,17 @@ PowerManagement.prototype.release = function(successCallback, failureCallback) {
 	cordova.exec(successCallback, failureCallback, 'PowerManagement', 'release', []);
 };
 
+/**
+ * Reboot the device, requires root access
+ *
+ * @param successCallback
+ *            function to be called when the wake-lock was released successfully
+ * @param errorCallback
+ *            function to be called when there was a problem while releasing the
+ *            wake-lock
+ */
+PowerManagement.prototype.reboot = function(successCallback, failureCallback) {
+    cordova.exec(successCallback, failureCallback, 'PowerManagement', 'reboot', []);
+};
+
 module.exports = new PowerManagement();
